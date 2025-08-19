@@ -1,5 +1,6 @@
 import { useState, useEffect } from "react";
 
+
 function App() {
   const quotesByTone = {
 
@@ -15,7 +16,7 @@ function App() {
       "Every human walks around with a certain kind of sadness.",
     ],
 
-    motivational: [
+    motivational:[
       "Push yourself, because no one else is going to do it for you.",
       "Great things never come from comfort zones.",
       "Dream it. Wish it. Do it.",
@@ -30,10 +31,9 @@ function App() {
 
   const [tone, setTone] = useState("happy");
   const [quote, setQuote] = useState("");
-
-
+  
   const generateQuote = () => {
-    const selectedQuotes = quotesByTone[tone];
+    const selectedQuotes = quotesByTone[tone];                                                                              
     const randomIndex = Math.floor(Math.random() * selectedQuotes.length);
     setQuote(selectedQuotes[randomIndex]);
   };
@@ -44,17 +44,18 @@ function App() {
   }, [tone]);
 
   return (
-    <div className="flex items-center justify-center h-screen bg-orange-500px">
+    <div className="flex items-center justify-center h-screen bg-sky-500">
       <div className="flex flex-col items-center text-center bg-white p-8 rounded-2xl shadow-lg">
         <h1 className="text-2xl font-bold mb-4">Quotes Generator Website</h1>
 
         <h1 className="mb-2">Select tone</h1>
-        
+          
 
         <select
           value={tone}
           onChange={(e) => setTone(e.target.value)}
-          className="border px-3 py-2 rounded mb-4"
+          className="border solid px-3 py-2 rounded mb-4 bg-blue-300 transition-all duration-300 ease-in-out 
+             focus:ring-4 focus:ring-blue-400 focus:scale-105"
         >
           <option value="motivational">Motivational</option>
           <option value="funny">Funny</option>
@@ -63,10 +64,19 @@ function App() {
         </select>
 
         <div className="bg-white p-6 rounded-lg shadow-lg max-w-lg text-center">
-          <p className="text-xl italic mb-4">{quote}</p>
+          <p key={quote} 
+              initial={{ opacity: 0, y: 20 }}  
+              animate={{ opacity: 1, y: 0 }}   
+              transition={{ duration: 0.6 }}
+           className="text-xl italic mb-4">{quote}</p>
           <button
             onClick={generateQuote}
-            className="bg-blue-500 text-white px-4 py-2 rounded-lg hover:bg-blue-600 transition"
+            className="bg-gradient-to-r from-yellow-500 to-blue-500 
+             text-white px-6 py-3 rounded-xl shadow-md
+             transition-all duration-300 ease-in-out
+             hover:from-blue-500 hover:to-purple-500
+             hover:scale-110 hover:shadow-xl
+             active:scale-95"
           >
             Generate new quote
           </button>
