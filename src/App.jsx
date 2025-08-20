@@ -1,7 +1,9 @@
 import { useState, useEffect } from "react";
+import Login from "./Login";
 
 
 function App() {
+  const [isLoggedIn, setIsLoggedIn] = useState(false);
   const quotesByTone = {
 
     happy: [
@@ -42,6 +44,11 @@ function App() {
   useEffect(() => {
     generateQuote();
   }, [tone]);
+
+  if (!isLoggedIn){
+    return <Login onLogin={() => setIsLoggedIn(true)} />;
+  
+  }
 
   return (
     <div className="flex items-center justify-center h-screen bg-sky-500">
